@@ -1,0 +1,42 @@
+{% include 'base/index.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md 3"></div>
+        <div class="col-md 6">
+            <div class="row">
+                <form method="POST" action="{% url 'car:save_car' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-grup">
+                        <label for="">{{form.car_name.label}}</label>
+                        {{form.car_name}} 
+                    </div>
+                    <div class="form-grup">
+                        <label for="">{{form.car_brand.label}}</label>
+                        {{form.car_brand}} 
+                    </div>
+                    <div class="form-grup">
+                        <label for="">{{form.seating_capacity.label}}</label>
+                        {{form.seating_capacity}}
+                    </div>
+                    <div class="form-grup">
+                        <label for="">{{form.cargo_volume.label}}</label>
+                        {{form.cargo_volume}} 
+                    </div>
+                    <div class="form-grup">
+                        <label for="">{{form.car_pict.label}}</label>
+                        {{form.car_pict}} 
+                    </div>
+                    <br>
+                    <div class="form-grup">
+                        <button type="submit" class="btn btn-info"> Add </button>
+                        <a href="/car/" class="btn btn-outline-secondary">Kembali</a>
+                    </div>
+            </form>
+            </div>
+        </div>
+        <div class="col-md 3"></div>
+    </div>
+</div>
+{% endblock content %}

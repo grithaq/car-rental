@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Register</title>
+	{% include 'base/css.html' %}
+	{% include 'base/js.html' %}
+</head>
+<body style="background-image: url({% static 'img/Login/2725568.jpg' %});">
+	<div class="container">
+		<div class="row">
+			<div class="col-3"></div>
+			<div class="col-6" style="background-color:#212529; margin-top: 94 px;">
+				<form action="register/process" method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					<h1 class="text-center" style="color:azure ;">Register</h1>
+					<br>
+					{% if messages %}
+						{% for messages in messages %}
+						<p style="color: rgb(238, 241, 34);">{{messages}}</p>
+						{% endfor %}
+					
+					{% endif %}
+					<div class="form-grup">
+						<label style="color: azure;" for="">{{form.username.label}}</label>
+						{{form.username}}
+					</div>
+					<div class="form-grup">
+						<label style="color: azure;" for="">{{form.password.label}}</label>
+						{{form.password}}
+					</div>
+					<div class="form-grup">
+						<label style="color: azure;" for="">{{form.password_confirmation.label}}</label>
+						{{form.password_confirmation}}
+					</div>
+					<div class="form-grup">
+						<label style="color: azure;" for="">{{form.first_name.label}}</label>
+						{{form.first_name}}
+					</div>
+					<div class="form-grup">
+						<label style="color: azure;" for="">{{form.last_name.label}}</label>
+						{{form.last_name}}
+					</div>
+					<div class="form-grup">
+						<label style="color: azure;" for="">{{form.no_telepon.label}}</label>
+						{{form.no_telepon}}
+					</div>
+					<div class="form-grup">
+						<label style="color: azure;" for="">{{form.nik_customers.label}}</label>
+						{{form.nik_customers}}
+					</div>
+					<div class="form-grup">
+						<label style="color: azure;" for="">{{form.gender.label}}</label>
+						{{form.gender}}
+					</div>
+					<div class="form-grup">
+						<label style="color: azure;" for="">{{form.photo_profile.label}}</label>
+						{{form.photo_profile}}
+					</div>
+					<div class="form-grup">
+						<button type="submit" class="btn btn-info">Simpan</button>
+						<a href="/login" class="btn btn-outline-primary">Kembali</a>
+					</div>
+				</form>
+			</div>
+			<div class="col-3"></div>
+		</div>
+	</div>
+</body>
+</html>
