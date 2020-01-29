@@ -35,6 +35,31 @@
                           {% endfor %}
                         </tbody>
                       </table>
+                      {%for c in cars %}
+                      <div class="container">
+                        <div class="row">
+                          <div class="card">
+                            <img src="{{c.car_pict.url}}" style="height: 216px; width: 345px;">
+                          </div>
+                          <div class="col">
+                            <table>
+                              <h2>{{c.car_name}}</h2>
+                              <tr>
+                                <br>
+                                <td>Brand:</td>
+                                <td>{{c.car_brand}}</td>
+                              </tr>
+                              <tr>
+                                <br>
+                                <td>Seating Capacity :</td>
+                                <td>{{c.seating_capacity}}</td>
+                              </tr>
+                            </table>
+                          </div>
+                        </divcl>
+                      </div>
+                      {% endfor %}
+
                       <a href="/car/add_car" class="btn btn btn-info"> + </a>
         </div>
         <div class="col-md-2"></div>

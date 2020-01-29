@@ -8,4 +8,3 @@ class Settings(models.Model):
         return self.item
     class Meta:
         db_table = 'settings'
-        ordering = [id]

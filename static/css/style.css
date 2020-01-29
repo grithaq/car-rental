@@ -9,10 +9,53 @@ li, a, button {
     color: #edf0f1;
     text-decoration: none;
 }
-
-.header_user{
+.navbar_logo {
+    font-size: 39px;
+    font-weight: 600;
+    padding: 0px;
+}
+.nav_admin{
+    margin-top: 5px;
+}
+.header_admin{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 10%;
+    padding: 22px 10%;
+    background-color: #24252a;
 }
+
+.nav_logout{
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Montserrat",sans-serif;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+.nav_link{
+    list-style: none;
+}
+.nav_link li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_link li a {
+    transition: all 0.3s ease 0s;
+    padding: 0px 8px;
+}
+
+.nav_link li a:hover {
+    color: #0088a9;
+}
+
+.logout_button{
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+

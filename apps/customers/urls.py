@@ -1,8 +1,6 @@
 from django.urls import path
-from .views import *
+from apps.customers.views import *
 
 urlpatters = [
-    path('',ListCustomers.as_view()),
-    path('add',AddCustomers.as_view()),
-    path('update',UpdateCustomers.as_view()),
+    path('landing', MemberLandingPage.as_view()),
 ]

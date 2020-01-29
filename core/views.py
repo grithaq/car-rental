@@ -103,14 +103,23 @@ class LoginProcess(View):
             print(username_login)
             password_login = form.cleaned_data['password']
             print(password_login)
-
+            # cari = User.objects.filter(username=username_login)
+            # print(cari)
             user = authenticate(username=username_login,password=password_login)
-            print(user)
-            if user is not None:
-                login(request,user)
-                return redirect('/car')
-            messages.error(request,'Username dan Password Tidak di temukan')
-            return redirect('/login')
+            if user:
+                print('ada brooo')
+                print("type of user",(type(user)))
+                print(user.is_superuser)
+                print(user)
+                if user.is_superuser is True:
+                    login(request,user)
+                    return redirect('/car')
+                else:
+                    login(request,user)
+                    return redirect('/customers/landing_page')
+            else:
+                messages.error(request,' Username dan Password salah')
+                return redirect('/login')
         messages.error(request,'Masukan Username dan Password')
         return redirect('/login')
 

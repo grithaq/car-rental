@@ -2,7 +2,7 @@ database.sqlite
 
 ./*.sqlite
 *.sqlite
-
+media/
 migrations/
 migrations/*
 migrations/**

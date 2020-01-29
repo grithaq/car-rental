@@ -1,28 +1,28 @@
 {
-  "_from": "popper.js",
-  "_id": "popper.js@1.16.0",
+  "_from": "popper.js@1.14.3",
+  "_id": "popper.js@1.14.3",
   "_inBundle": false,
-  "_integrity": "sha512-+G+EkOPoE5S/zChTpmBSSDYmhXJ5PsW8eMhH8cP/CQHMFPBG/kC9Y5IIw6qNYgdJ+/COf0ddY2li28iHaZRSjw==",
+  "_integrity": "sha1-FDj5jQRqz3tNeM1QK/QYrGTU8JU=",
   "_location": "/popper.js",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "version",
     "registry": true,
-    "raw": "popper.js",
+    "raw": "popper.js@1.14.3",
     "name": "popper.js",
     "escapedName": "popper.js",
-    "rawSpec": "",
+    "rawSpec": "1.14.3",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "1.14.3"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/popper.js/-/popper.js-1.16.0.tgz",
-  "_shasum": "2e1816bcbbaa518ea6c2e15a466f4cb9c6e2fbb3",
-  "_spec": "popper.js",
-  "_where": "/home/apip/PycharmProjects/car_rental/config/static/vendors",
+  "_resolved": "https://registry.npmjs.org/popper.js/-/popper.js-1.14.3.tgz",
+  "_shasum": "1438f98d046acf7b4d78cd502bf418ac64d4f095",
+  "_spec": "popper.js@1.14.3",
+  "_where": "/home/e/projects/car-rental/static/vendors",
   "author": {
     "name": "Federico Zivolo",
     "email": "federico.zivolo@gmail.com"
@@ -70,7 +70,7 @@
     "micromatch": "^3.0.3"
   },
   "scripts": {
-    "build": "node bundle.js && cp index.js.flow dist/umd/popper.js.flow",
+    "build": "node bundle.js",
     "coverage": "COVERAGE=true yarn test",
     "lint": "eslint .",
     "postpublish": "nuget-publish && ./bower-publish.sh",
@@ -81,8 +81,6 @@
     "test": "popper-karma",
     "test:dev": "BROWSERS=Chrome NODE_ENV=development yarn test"
   },
-  "sideEffects": false,
   "types": "index.d.ts",
-  "unpkg": "dist/umd/popper.min.js",
-  "version": "1.16.0"
+  "version": "1.14.3"
 }
