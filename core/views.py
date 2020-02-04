@@ -56,6 +56,12 @@ class RegisterProcess(View):
                 print(user_name)
                 print(user_password)
                 user = User.objects.create_user(username=user_name,password=user_password)
+                print(type(user))
+                print(user)
+                user.first_name =form.cleaned_data['first_name']
+                user.last_name =form.cleaned_data['last_name']
+
+                
                 # user.set_password(user.password)
                 user.save()
 
@@ -67,7 +73,7 @@ class RegisterProcess(View):
                 cus.save()
                 print(cus)
 
-                return redirect('/car')
+                return redirect('/customers/landing_page')
             else:
                 return redirect('/register')
         else:

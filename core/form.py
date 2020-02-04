@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=45, label='Username',widget=forms.TextInput(attrs={

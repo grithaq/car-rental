@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from core.views import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from apps.customers.views import *
+# from apps.customers.views import *
 # from apps.cars.views import KatalogView
 
 # app_name = 'apps.drivers'
@@ -35,7 +35,7 @@ urlpatterns = [
     path('logout',Logout.as_view()),
 
     #customers
-    path('customers/landing_page',MemberLandingPage.as_view()),
+    # path('customers/landing_page',MemberLandingPage.as_view()),
 
 
 
@@ -44,7 +44,8 @@ urlpatterns = [
     
 
     #include
-    path('car/', include('apps.cars.urls')),
+    path('car/',include(('apps.cars.urls','cars'),namespace='car')),
+    path('customers/',include(('apps.customers.urls','customers'),namespace='customers')),
 
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
