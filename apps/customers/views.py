@@ -75,14 +75,14 @@ class UpdateCustomers(View):
             'gender':cus.gender,
             'photo_profile':cus.photo_profile
         }
-        form = EditCustomers(initial=data)
+        form = CreateCustomerForm(initial=data)
         return render(request,self.template_name,{
             'form':form
         })
     def post(self,request,id):
         cus = Customers.objects.get(id=id)
         print(cus)
-        form = EditCustomers(request.POST,request.FILES)
+        form = CreateCustomerForm(request.POST,request.FILES)
         print(form)
         if form.is_valid():
             user = User.objects.get(username=form.cleaned_data['username'])
