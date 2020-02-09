@@ -1,0 +1,33 @@
+{% include "base/index.html" %}
+{% block content %}
+{% include "base/navbar.html" %}
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.id}}
+        <div class="form-grup">
+            <label for="">{{form.username.label}}</label>
+            {{form.username}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.first_name.label}}</label>
+            {{form.first_name}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.last_name.label}}</label>
+            {{form.last_name}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.photo_profile.label}}</label>
+            <div>
+                <img src="{{photo.url}}">
+            </div>
+            {{form.photo_profile}}
+        </div>
+        <button class="btn btn-primary" type="submit">Simpan</button>
+        <a href="/customers" class="btn btn-info">Kembbali</a>
+    </form>
+</div>
+
+
+{% endblock content %}

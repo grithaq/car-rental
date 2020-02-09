@@ -1,0 +1,38 @@
+{% include "base/index.html" %}
+{% block content %}
+{% include "base/navbar.html" %}
+<div class="container">
+    <form action="">
+        {% csrf_token %}
+        {{form.id}}
+        <div class="form-grup">
+            <label for="">{{form.first_name.label}}</label>
+            {{form.first_name}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.last_name.label}}</label>
+            {{form.last_name}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.no_telepon.label}}</label>
+            {{form.no_telepon}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.nik_customers.label}}</label>
+            {{form.nik_customers}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.gender.label}}</label>
+            {{form.gender}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.photo_profile.label}}</label>
+            {{form.photo_profile}}
+        </div>
+        <div>
+            <button class="btn btn-info" type="submit">Simpan</button>
+            <a class="btn btn-success" href="/customers/detail/{{id}}">Kembali</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}

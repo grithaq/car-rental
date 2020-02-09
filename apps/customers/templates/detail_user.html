@@ -1,0 +1,54 @@
+{% include "base/index.html" %}
+{% block content %}
+{% include "base/navbar.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-4">
+            <img src="{{user.customers.photo_profile.url}}" style="width: 255px; height: 307px;">
+        </div>
+        <div class="col-6">
+            <table class="table">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <td>Id </td>
+                        <td>:</td>
+                        <td>{{user.id}}</td>
+                    </tr>
+                    <tr>
+                        <td>First Name </td>
+                        <td>:</td>
+                        <td>{{user.first_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name </td>
+                        <td>:</td>
+                        <td>{{user.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <td> Phone Number </td>
+                        <td>:</td>
+                        <td>{{user.customers.no_telepon}}</td>
+                    </tr>
+                    <tr>
+                        <td> NIK </td>
+                        <td>:</td>
+                        <td>{{user.customers.nik_customers}}</td>
+                    </tr>
+                    <tr>
+                        <td> Gender </td>
+                        <td>:</td>
+                        <td>{{user.customers.gender}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <a href="/customers/update_detail/{{user.id}}" class="btn btn-info">Edit</a>
+                <a href="/customers" class="btn btn-secondary">kembali</a>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+{% endblock content %}

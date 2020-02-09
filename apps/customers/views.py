@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Customers
 from .forms import *
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 # from .forms import CustomersForm
 from django.views import View
 from django.http import HttpResponse
@@ -19,10 +20,84 @@ class AdminLandingPage(View):
     template_name = 'customers.html'
 
     def get(self,request):
-        cus = Customers.objects.all()
+        user = User.objects.all()
         return render(request,self.template_name,{
-            'cus':cus,
+            'user':user,
         })
+
+class CreateUser(View):
+    template_name = 'create_user.html'
+    def get(self,request):
+        form = UserForm(request.POST,request.FILES)
+        return render(request,self.template_name,{
+            'form':form,
+        })
+    def post(self,request):
+        form = UserForm(request.POST,request.FILES)
+        if form.is_valid():
+            if request.POST['password'] == request.POST['password_confirmation']:
+                UserName = form.cleaned_data['username']
+                pswd = form.cleaned_data['password']
+                user = User.objects.create_user(username=UserName,password=pswd)
+                user.first_name = form.cleaned_data['first_name']
+                user.last_name = form.cleaned_data['last_name']
+                user.save()
+                cus = Customers()
+                cus.user=user
+                cus.photo_profile = request.FILES['photo_profile']
+                cus.save()
+                return redirect('/customers')
+            messages.error(request,'Password tidak sesuai')
+            return redirect('/customers/create')
+        return HttpResponse(request,form.errors)
+
+
+class UpdateUser(View):
+    template_name = 'edit_user.html'
+    def get(self,request,id):
+        user = User.objects.get(id=id)
+        photo = user.customers.photo_profile
+        # print(user)
+        data = {
+            'id':id,
+            'username':user.username,
+            'first_name':user.first_name,
+            'password':user.password,
+
+            'last_name':user.last_name,
+            'photo_profile':user.customers.photo_profile
+        }
+        form = UserForm(initial=data)
+        # print(form)
+        return render(request,self.template_name,{
+            'form':form,
+            'photo':photo
+        })
+    def post(self,request,id):
+       
+        form = UserForm(request.POST,request.FILES)
+        # print('Ini adalah reuest dari post',request.POST)
+        # print('Ini adalah request File',request.FILES)
+        if form.is_valid():
+            us = User.objects.get(id=id)
+            print(user)
+            cus = Customers.objects.get(user=us)
+            print(cus)
+            us.username = form.cleaned_data['username']
+            us.first_name = form.cleaned_data['first_name']
+            us.last_name = form.cleaned_data['last_name']
+            cus.photo_profile = request.FILES['photo_profile']
+            user.save()
+            cus.save()
+            return redirect('/customers')
+        return HttpResponse(request,form.errors)
+
+class DeleteUser(View):
+    def get(self,request,id):
+        obj = User.objects.get(id=id)
+        obj.delete()
+        return redirect('/customers')
+
 
 class CreateCustomers(View):
     template_name = 'add_customers.html'
@@ -103,11 +178,43 @@ class UpdateCustomers(View):
         return HttpResponse(form.errors)
 
 
-
-
-class DeleteCustomers(View):
+class DetailUser(View):
+    template_name = 'detail_user.html'
     def get(self,request,id):
-        obj = Customers.objects.get(id=id)
-        obj.delete()
-        return redirect('/customers')
+        user = User.objects.get(id=id)
+        return render(request,self.template_name,{
+            'user':user,
+        })
+
+class EditDetailUser(View):
+    template_name = 'edit_detail.html'
+    def get(self,request,id):
+        user = User.objects.get(id=id)
+        data={
+            'id':id,
+            'first_name':user.first_name,
+            'last_name':user.last_name,
+            'no_telepon':user.customers.no_telepon,
+            'nik_customers':user.customers.nik_customers,
+            'gender':user.customers.gender,
+            'photo_profile':user.customers.photo_profile
+        }
+        form = EditDetail(initial=data)
+        return render(request,self.template_name,{
+            'form':form,
+            'id':id
+        })
+    def post(self,request):
+        form = EditDetail(request.POST,request.FILES)
+        if form.is_valid():
+            user = User.objects.get(id=form.cleaned_data['id'])
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.customers.no_telepon = form.cleaned_data['no_telepon']
+            user.customers.nik_customers = form.cleaned_data['nik_customers']
+            user.customers.gender = form.cleaned_data['gender']
+            user.customers.photo_profile = form.cleaned_data['photo_profile']
+            user.save()
+            return redirect('/customers')
+
 

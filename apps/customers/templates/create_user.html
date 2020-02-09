@@ -1,0 +1,36 @@
+{% include "base/index.html" %}
+{% block content %}
+{% include "base/navbar.html" %}
+<dir class="container">
+    <form action="/customers/create" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-grup">
+            <label for="">{{form.username.label}}</label>
+            {{form.username}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.password.label}}</label>
+            {{form.password}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.password_confirmation.label}}</label>
+            {{form.password_confirmation}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.first_name.label}}</label>
+            {{form.first_name}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.last_name.label}}</label>
+            {{form.last_name}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.photo_profile.label}}</label>
+            {{form.photo_profile}}
+        </div>
+        <button class="btn btn-info" type="submit" style="margin-top: 15px; margin-left: 91%;">Simpan</button>
+        <a href="/customers" class="btn btn-success">Kembali</a>
+    </form>
+</dir>
+
+{% endblock content %}

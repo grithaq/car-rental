@@ -10,7 +10,7 @@ class Customers(models.Model):
     no_telepon = models.CharField(max_length=13)
     nik_customers = models.CharField(max_length=45)
     gender = models.CharField(max_length=2, choices=CHOISES,default='L')
-    photo_profile=models.ImageField(upload_to='image/customer/')
+    photo_profile=models.ImageField(upload_to='image/customer/',blank=True)
 
     def __str__(self):
         return self.user.username
