@@ -10,5 +10,5 @@ urlpatterns = [
     path('ubah',UbahKatalog.as_view(),name='ubah'),
     
     
-    path('customers',KatalogCostumers.as_view(),name='ubah'),
+    # path('customers',KatalogCostumers.as_view(),name='ubah'),
 ]

@@ -94,10 +94,11 @@ class UbahKatalog(View):
 
 
 
-class KatalogCostumers(View):
-    tempate_name = 'customers/user_landing_page.html'
-
-    def get(self,request):
-
-        return render(request,self.tempate_name)
+# class KatalogCostumers(View):
+#     tempate_name = 'user_landing_page.html'
+#     def get(self,request):
+#         mobil = Cars.objects.all()
+#         return render(request,self.tempate_name,{
+#             'mob':mobil,
+#         })
         

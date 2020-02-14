@@ -3,8 +3,7 @@
 {% include 'base/navbar.html' %}
 <div class="container">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-10">
                 <table class="table table-dark">
                         <thead>
                           <tr>
@@ -36,33 +35,39 @@
                         </tbody>
                       </table>
                       {%for c in cars %}
-                      <div class="container">
-                        <div class="row">
+                      <div>
+                        <div class="row" style="margin-bottom: 74px;">
+                          <a href="/car/add_car" class="btn btn btn-info" style=" margin-left: 94%; margin-bottom: 33px;"> + </a>
                           <div class="card">
                             <img src="{{c.car_pict.url}}" style="height: 216px; width: 345px;">
                           </div>
                           <div class="col">
-                            <table>
-                              <h2>{{c.car_name}}</h2>
+                            <table class="table">
+                              <h2 style="margin-left:18px ;">{{c.car_name}}</h2>
                               <tr>
                                 <br>
-                                <td>Brand:</td>
+                                <td> Brand </td>
+                                <td> : </td>
                                 <td>{{c.car_brand}}</td>
                               </tr>
                               <tr>
                                 <br>
-                                <td>Seating Capacity :</td>
+                                <td> Seating Capacity </td>
+                                <td> : </td>
                                 <td>{{c.seating_capacity}}</td>
+                              </tr>
+                              <tr>
+                                <br>
+                                <td> Cargo Volume </td>
+                                <td> : </td>
+                                <td>{{c.cargo_volume}}</td>
                               </tr>
                             </table>
                           </div>
-                        </divcl>
+                        </div>
                       </div>
                       {% endfor %}
-
-                      <a href="/car/add_car" class="btn btn btn-info"> + </a>
         </div>
-        <div class="col-md-2"></div>
     </div>
 </div>
 {% endblock content %}

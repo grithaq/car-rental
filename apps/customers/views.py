@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Customers
+from apps.cars.models import Cars
 from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
@@ -12,9 +13,11 @@ class MemberLandingPage(View):
     template_name = 'user_landing_page.html'
 
     def get(self,request):
-        cus = Customers.objects.all()
+        car = Cars.objects.all()
 
-        return render(request,self.template_name,)
+        return render(request,self.template_name,{
+            'car':car,
+        })
 
 class AdminLandingPage(View):
     template_name = 'customers.html'

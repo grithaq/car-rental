@@ -1,6 +1,42 @@
 {% include 'base/index.html' %}
 {% block content %}
 {% include 'base/user_navbar.html' %}
-
-<h1>ini adalah list dari mobil</h1>
+<div class="container">
+  <div class="row">
+    {% for c in car %}
+    <div class="col-md-3">
+      <img src="{{c.car_pict.url}}" alt="">
+    </div>
+    <div class="col-md-5">
+      <table class="table">
+        <h2 style="margin-left: 18px;">{{c.car_name}}</h2>
+        <tr>
+          <td>Brand</td>
+          <td>:</td>
+          <td>{{c.car_brand}}</td>
+        </tr>
+        <tr>
+          <td>Seating Capacity</td>
+          <td>:</td>
+          <td>{{c.seating_capacity}}</td>
+        </tr>
+        <tr>
+          <td>Cargo Volume</td>
+          <td>:</td>
+          <td>{{c.cargo_volume}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-3">
+      <div style="margin-left: 50px;">
+        <h4 style="margin-left: 22px;">Price for 1 Day</h4>
+        <h1>Rp.{{c.price}}</h1>
+      </div>
+      <div>
+        <a href="#" class="btn btn-primary" style="color: aliceblue; margin-left: 75px; margin-top: 25px; width: 191px; height: 54px;">Rent Now</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock content %}
