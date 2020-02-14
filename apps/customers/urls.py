@@ -12,5 +12,6 @@ urlpatterns = [
     path('delete/<int:id>',DeleteUser.as_view(),name='delete'),
     #detail
     path('detail/<int:id>',DetailUser.as_view(),name='detail'),
-    path('update_detail/<int:id>',EditDetailUser.as_view(),name='update_detail')
+    path('edit_detail/<int:id>',EditDetailUser.as_view(),name='edit_detail'),
+    path('update_detail/<int:id>',UpdateDetailUser.as_view(),name='update_detail')
 ]

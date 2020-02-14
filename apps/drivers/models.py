@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Drivers(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='drivers')
     nik_driver = models.CharField(max_length=45)
     driver_phone_number = models.CharField(max_length=45)
     sim_number = models.CharField(max_length=45)

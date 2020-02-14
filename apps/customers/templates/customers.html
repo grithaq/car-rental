@@ -1,7 +1,6 @@
 {% include "base/index.html" %}
 {% block content %}
 {% include "base/navbar.html" %}
-<h1>Crude user</h1>
 <div class="container">
   <table class="table" style="margin-bottom: 15px;">
     <thead>
@@ -23,7 +22,6 @@
         <td>{{u.customers.nik_customers}}</td>
         <td>{{u.customers.no_telepon}}</td>
         <td>
-          <!-- <a class='btn btn-primary' href="/customers/update/{{u.id}}">Edit</a> -->
           <a class='btn btn-secondary' href="/customers/delete/{{u.id}}">Delete</a>
           <a class='btn btn-success' href="/customers/detail/{{u.id}}">Detail</a>
         </td>

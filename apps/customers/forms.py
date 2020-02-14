@@ -28,6 +28,8 @@ class UserForm(forms.Form):
         'type':'text'
     }))
     photo_profile = forms.ImageField(label='Photos')
+
+
 class CreateCustomerForm(forms.Form):
     id = forms.CharField(widget=forms.TextInput(),required=False)
     GENDER_CHOISE=(
@@ -92,4 +94,4 @@ class EditDetail(forms.Form):
         'placeholder':'nik customer'
     }))
     gender = forms.ChoiceField(choices=GENDER,label='Gender',initial='L',required=True)
-    photo_profile = forms.ImageField()
+    photo_profile = forms.ImageField(required=False)

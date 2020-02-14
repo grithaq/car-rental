@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 
 class MemberLandingPage(View):
-    template_name = 'user_landing_page.html'
+    template_name = 'customers/user_landing_page.html'
 
     def get(self,request):
         car = Cars.objects.all()
@@ -207,17 +207,33 @@ class EditDetailUser(View):
             'form':form,
             'id':id
         })
-    def post(self,request):
-        form = EditDetail(request.POST,request.FILES)
-        if form.is_valid():
-            user = User.objects.get(id=form.cleaned_data['id'])
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
-            user.customers.no_telepon = form.cleaned_data['no_telepon']
-            user.customers.nik_customers = form.cleaned_data['nik_customers']
-            user.customers.gender = form.cleaned_data['gender']
-            user.customers.photo_profile = form.cleaned_data['photo_profile']
-            user.save()
-            return redirect('/customers')
+
+
+class UpdateDetailUser(View):
+        def post(self,request,id):
+            form = EditDetail(request.POST,request.FILES)
+            print('test')
+            # print(form)
+            if form.is_valid():
+                print(form.cleaned_data)
+                user = User.objects.get(id=form.cleaned_data['id'])
+                print(user)
+                user.first_name = form.cleaned_data['first_name']
+                user.last_name = form.cleaned_data['last_name']
+                user.save()
+                cus = Customers.objects.get(user=user)
+                # cus.user = user
+                cus.no_telepon = form.cleaned_data['no_telepon']
+                cus.nik_customers = form.cleaned_data['nik_customers']
+                cus.gender = form.cleaned_data['gender']
+                print(cus.gender)
+                try:
+                    cus.photo_profile = request.FILES['photo_profile']
+                except Exception:
+                    pass
+                
+                
+                cus.save()
+                return redirect('/customers')
 
 

@@ -1,14 +1,11 @@
 from django.contrib import admin
 from django.urls import path
-from apps.cars.views import *
+from apps.drivers.views import *
 urlpatterns = [
-    path('', KatalogView.as_view()),
-    path('add_car',TambahKatalogView.as_view(),name='add_car'),
-    path('save_car',SaveKatalog.as_view(),name='save_car'),
-    path('delete/<int:id>',DeleteKatalog.as_view(),name='delete'),
-    path('change/<int:id>',UpdateKatalog.as_view(),name='change'),
-    path('ubah',UbahKatalog.as_view(),name='ubah'),
+    path('', ListDrivers.as_view()),
+    path('add_driver', CreateDriver.as_view(),name='add_driver'),
+    path('update/<int:driver_id>', UpdateDriver.as_view(),name='update'),
+    path('delete/<int:driver_id>', DeleteDriver.as_view(),name='delete'),
+    path('detail/<int:driver_id>', DriverDetail.as_view(),name='detail'),
     
-    
-    path('customers',KatalogCostumers.as_view(),name='ubah'),
 ]

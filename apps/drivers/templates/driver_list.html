@@ -1,0 +1,38 @@
+{% include 'base/index.html' %}
+{% block contain %}
+{% include 'base/navbar.html' %}
+<div class="container">
+    <a href="/drivers/add_driver" class="btn btn-primary">+</a>
+    <a href="#"> + by user (add driver by user)</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Photo Profile</th>
+                <th>Driver Name</th>
+                <th>NIK</th>
+                <th>Phone Number</th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for d in driver %}
+            <tr>
+                <td>
+                    <img style="height: 200px; width: 200px; border-radius: 100px;" src="{{d.photo_profile.url}}" alt="">
+                </td>
+                <td>{{d.user.first_name}}</td>
+                <td>{{d.nik_driver}}</td>
+                <td>{{d.driver_phone_number}}</td>
+                <td>
+                    <a class="btn btn-danger" href="{% url 'drivers:delete' d.id %}">Delete</a>
+                    <a class="btn btn-info" href="#">Detail</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
+
+{% endblock contain %}
