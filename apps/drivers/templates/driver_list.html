@@ -3,7 +3,7 @@
 {% include 'base/navbar.html' %}
 <div class="container">
     <a href="/drivers/add_driver" class="btn btn-primary">+</a>
-    <a href="#"> + by user (add driver by user)</a>
+    <a href="#" class='btn btn-success' > + by user (add driver by user)</a>
     <table class="table">
         <thead>
             <tr>
@@ -26,7 +26,7 @@
                 <td>{{d.driver_phone_number}}</td>
                 <td>
                     <a class="btn btn-danger" href="{% url 'drivers:delete' d.id %}">Delete</a>
-                    <a class="btn btn-info" href="#">Detail</a>
+                    <a class="btn btn-info" href="{% url 'drivers:detail' d.id %}">Detail</a>
                 </td>
             </tr>
             {% endfor %}

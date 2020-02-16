@@ -23,9 +23,9 @@ class AdminLandingPage(View):
     template_name = 'customers.html'
 
     def get(self,request):
-        user = User.objects.all()
+        cus = Customers.objects.all()
         return render(request,self.template_name,{
-            'user':user,
+            'cus':cus,
         })
 
 class CreateUser(View):
@@ -97,7 +97,7 @@ class UpdateUser(View):
 
 class DeleteUser(View):
     def get(self,request,id):
-        obj = User.objects.get(id=id)
+        obj = Customers.objects.get(id=id)
         obj.delete()
         return redirect('/customers')
 
@@ -184,23 +184,23 @@ class UpdateCustomers(View):
 class DetailUser(View):
     template_name = 'detail_user.html'
     def get(self,request,id):
-        user = User.objects.get(id=id)
+        cus = Customers.objects.get(id=id)
         return render(request,self.template_name,{
-            'user':user,
+            'cus':cus,
         })
 
 class EditDetailUser(View):
     template_name = 'edit_detail.html'
     def get(self,request,id):
-        user = User.objects.get(id=id)
+        cus = Customers.objects.get(id=id)
         data={
             'id':id,
-            'first_name':user.first_name,
-            'last_name':user.last_name,
-            'no_telepon':user.customers.no_telepon,
-            'nik_customers':user.customers.nik_customers,
-            'gender':user.customers.gender,
-            'photo_profile':user.customers.photo_profile
+            'first_name':cus.user.first_name,
+            'last_name':cus.user.last_name,
+            'no_telepon':cus.no_telepon,
+            'nik_customers':cus.nik_customers,
+            'gender':cus.gender,
+            'photo_profile':cus.photo_profile
         }
         form = EditDetail(initial=data)
         return render(request,self.template_name,{
@@ -216,13 +216,13 @@ class UpdateDetailUser(View):
             # print(form)
             if form.is_valid():
                 print(form.cleaned_data)
-                user = User.objects.get(id=form.cleaned_data['id'])
-                print(user)
+                cus = Customers.objects.get(id=form.cleaned_data['id'])
+                user = User.objects.get(id=cus.user.id)
+                print(cus)
                 user.first_name = form.cleaned_data['first_name']
                 user.last_name = form.cleaned_data['last_name']
                 user.save()
                 cus = Customers.objects.get(user=user)
-                # cus.user = user
                 cus.no_telepon = form.cleaned_data['no_telepon']
                 cus.nik_customers = form.cleaned_data['nik_customers']
                 cus.gender = form.cleaned_data['gender']

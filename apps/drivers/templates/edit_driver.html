@@ -2,5 +2,54 @@
 {% block contain %}
 {% include 'base/navbar.html' %}
 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form action="/drivers/update/{{id}}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.id}}
+                <div class="form-grup">
+                    <label for="" >{{form.first_name.label}}</label>
+                    {{form.first_name}}
+                </div>
+                <div class="form-grup">
+                    <label for="" >{{form.last_name.label}}</label>
+                    {{form.last_name}}
+                </div>
+                <div class="form-grup">
+                    <label for="" >{{form.nik_driver.label}}</label>
+                    {{form.nik_driver}}
+                </div>
+                <div class="form-grup">
+                    <label for="" >{{form.driver_phone_number.label}}</label>
+                    {{form.driver_phone_number}}
+                </div>
+                <div class="form-grup">
+                    <label for="" >{{form.sim_number.label}}</label>
+                    {{form.sim_number}}
+                </div>
+                <div class="form-grup">
+                    <label for="" >{{form.sim_pict.label}}</label>
+                    <img src="{{form.sim_pict.url}}" alt="">
+                    {{form.sim_pict}}
+                </div>
+                <div class="form-grup">
+                    <label for="" >{{form.ktp_pict.label}}</label>
+                    <img src="{{form.ktp_pict.url}}" alt="">
+                    {{form.ktp_pict}}
+                </div>
+                <div class="form-grup">
+                    <label for="" >{{form.photo_profile.label}}</label>
+                    <img src="{{form.photo_profile.url}}" alt="">
+                    {{form.photo_profile}}
+                </div>
+                <tr>
+                    <button type="submit" class="btn btn-info" style="margin-left: 90%; margin-top: 15px;">Simpan</button>
+                    <a href="/drivers/detail/{{id}}" class="btn btn-success" style="margin-bottom: 15px;margin-left: 90%;">Kembali</a>
+                </tr>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock contain %}

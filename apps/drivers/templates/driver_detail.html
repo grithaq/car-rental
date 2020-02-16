@@ -1,0 +1,66 @@
+{% include 'base/index.html' %}
+{% block contain %}
+{% include 'base/navbar.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{driver.photo_profile.url}}" alt="" style="height: 233px;">
+        </div>
+        <div class="col-md-5">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>First Name</td>
+                        <td>:</td>
+                        <td>{{driver.user.first_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>:</td>
+                        <td>{{driver.user.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>NIK</td>
+                        <td>:</td>
+                        <td>{{driver.nik_driver}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td>:</td>
+                        <td>{{driver.driver_phone_number}}</td>
+                    </tr>
+                    <tr>
+                        <td>SIM Number</td>
+                        <td>:</td>
+                        <td>{{driver.sim_number}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>KTP</td>
+                        <td>:</td>
+                        <td>
+                            <img src="{{driver.ktp_pict.url}}" alt="" style="height: 116px; width: 206px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>SIM</td>
+                        <td>:</td>
+                        <td>
+                            <img src="{{driver.sim_pict.url}}" alt="" style="height: 116px; width: 206px;">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="/drivers/edit/{{driver.id}}" class="btn btn-primary">Edit</a>
+            <a href="/drivers" class="btn btn-info">Kembali</a>
+        </div>
+    </div>
+</div>
+
+{% endblock contain %}

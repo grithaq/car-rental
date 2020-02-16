@@ -12,18 +12,18 @@
         <th>Action</th>
       </tr>
     </thead>
-    {% for u in user %}
+    {% for c in cus %}
     <tbody>
       <tr>
         <td class="card">
-          <img src="{{u.customers.photo_profile.url}} " style="height: 195px;; width: 205px; border: none;  border-radius: 100px;">
+          <img src="{{c.photo_profile.url}} " style="height: 195px;; width: 205px; border: none;  border-radius: 100px;">
         </td>
-        <td>{{u.first_name}}</td>
-        <td>{{u.customers.nik_customers}}</td>
-        <td>{{u.customers.no_telepon}}</td>
+        <td>{{c.user.first_name}}</td>
+        <td>{{c.nik_customers}}</td>
+        <td>{{c.no_telepon}}</td>
         <td>
-          <a class='btn btn-secondary' href="/customers/delete/{{u.id}}">Delete</a>
-          <a class='btn btn-success' href="/customers/detail/{{u.id}}">Detail</a>
+          <a class='btn btn-secondary' href="/customers/delete/{{c.id}}">Delete</a>
+          <a class='btn btn-success' href="/customers/detail/{{c.id}}">Detail</a>
         </td>
       </tr>
     </tbody>
