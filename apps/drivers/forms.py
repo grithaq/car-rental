@@ -80,7 +80,7 @@ class DriverEditForm(forms.Form):
         'placeholder':'sim number'
     }))
 
-    sim_pict = forms.ImageField()
-    ktp_pict = forms.ImageField()
-    photo_profile = forms.ImageField()
+    sim_pict = forms.ImageField(required=False)
+    ktp_pict = forms.ImageField(required=False)
+    photo_profile = forms.ImageField(required=False)
 

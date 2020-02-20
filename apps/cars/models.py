@@ -8,6 +8,7 @@ class Cars(models.Model):
     cargo_volume = models.IntegerField()
     car_pict = models.ImageField(upload_to='image/cars/')
     price = models.CharField(max_length=12,blank=True,null=True,default='0.0')
+    avaliable = models.BooleanField(default=True)
 
     def __str__(self):
         return self.car_name

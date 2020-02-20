@@ -1,0 +1,52 @@
+{% include "base/index.html" %}
+{% block contain %}
+{% include "base/navbar.html" %}
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a href="/rental" class="nav-link active">Unverified </a>
+        </li>
+        <li class="nav-item" style="margin-left: 10px;">
+          <a href="{% url 'rental:verified_list' %}" class="">Verified</a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{% url 'rental:create' %}" class="btn btn-info" style="margin-left: 100%;">+</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Customer</th>
+                        <th>Car</th>
+                        <th>Start Rental Date</th>
+                        <th>Expire Rental Date</th>
+                        <th>Phone Number</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in rent %}
+                    <tr>
+                        <td>
+                            <img style="width: 215px; height: 215px;" src="{{r.customer.photo_profile.url}}" alt="">
+                        </td>
+                        <td>{{r.customer.user.first_name}}</td>
+                        <td>{{r.car}}</td>
+                        <td>{{r.rental_date}}</td>
+                        <td>{{r.expire_rental_date}}</td>
+                        <td>{{r.customer.no_telepon}}</td>
+                        <td style="width: 268px;">
+                            <a href="{% url 'rental:verified' r.id %}" class="btn btn-primary">Verify</a>
+                            <a href="{% url 'rental:detail' r.id %}" class="btn btn-success">Detail</a>
+                            <a href="{% url 'rental:delete' r.id %}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock contain %}

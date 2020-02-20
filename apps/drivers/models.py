@@ -13,7 +13,7 @@ class Drivers(models.Model):
 
 
     def __str__(self):
-        return self.nik_driver
+        return self.user.first_name
 
     class Meta:
         db_table = 'drivers'

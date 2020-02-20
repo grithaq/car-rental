@@ -39,6 +39,7 @@ class SaveKatalog(View):
             car.car_brand=form.cleaned_data['car_brand']
             car.cargo_volume = form.cleaned_data['cargo_volume']
             car.seating_capacity = form.cleaned_data['seating_capacity']
+            car.price = form.cleaned_data['price']
             car.car_pict = request.FILES['car_pict']
             car.save()
 

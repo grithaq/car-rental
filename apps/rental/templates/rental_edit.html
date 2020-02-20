@@ -1,0 +1,48 @@
+{% include "base/index.html" %}
+{% block container %}
+{% include "base/navbar.html" %}
+<div class="container">
+    <form action="{% url 'rental:update' id %}" method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{form.id}}
+        <div class="form-grup">
+            <label for="">{{form.customer.label}}</label>
+            {{form.customer}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.car.label}}</label>
+            {{form.car}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.rental_date.label}}</label>
+            {{form.rental_date}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.expire_rental_date.label}}</label>
+            {{form.expire_rental_date}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.payment_pict.label}}</label>
+            {{form.payment_pict}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.driver.label}}</label>
+            {{form.driver}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.petrol.label}}</label>
+            {{form.petrol}}
+        </div>
+        <div class="form-grup">
+            <label for="">{{form.verification.label}}</label>
+            {{form.verification}}
+        </div>
+        <div>
+            <button type="submit" class="btn btn-info" style="margin-left: 90%;">Submit</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock container %}

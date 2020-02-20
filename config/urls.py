@@ -47,6 +47,7 @@ urlpatterns = [
     path('car/',include(('apps.cars.urls','cars'),namespace='car')),
     path('customers/',include(('apps.customers.urls','customers'),namespace='customers')),
     path('drivers/',include(('apps.drivers.urls','drivers'),namespace='drivers')),
+    path('rental/',include(('apps.rental.urls','rental'),namespace='rental'))
 
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

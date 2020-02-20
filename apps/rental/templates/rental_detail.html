@@ -1,0 +1,66 @@
+{% include "base/index.html" %}
+{% block contain %}
+{% include "base/navbar.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img style="height: 215px; width: 215px;" src="{{rent.customer.photo_profile.url}}" alt="">
+        </div>
+        <div class="col-md-9">
+            <table class="table">
+                <tr>
+                    <td>Name</td>
+                    <td>:</td>
+                    <td>{{rent.customer.user.first_name}}</td>
+                </tr>
+                <tr>
+                    <td>Car</td>
+                    <td>:</td>
+                    <td>{{rent.car.car_name}}</td>
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td>:</td>
+                    <td>{{rent.rental_date}}</td>
+                </tr>
+                <tr>
+                    <td>Expire Date</td>
+                    <td>:</td>
+                    <td>{{rent.expire_rental_date}}</td>
+                </tr>
+                <tr>
+                    <td>Driver</td>
+                    <td>:</td>
+                    <td>{{rent.driver}}</td>
+                </tr>
+                <tr>
+                    <td>Petrol</td>
+                    <td>:</td>
+                    <td>{{rent.petrol}}</td>
+                </tr>
+                <tr>
+                    <td>Verified</td>
+                    <td>:</td>
+                    <td>{{rent.verification}}</td>
+                </tr>
+                <tr>
+                    <td>Proof Of Pyment</td>
+                    <td>:</td>
+                    <td>
+                        <img style="height: 215; width: 315; " src="{{rent.payment_pict.urls}}" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a href="/rental" class="btn btn-info">Kembali</a>
+                        <a href="{% url 'rental:edit' rent.id %}" class="btn btn-warning">Edit</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock contain %}

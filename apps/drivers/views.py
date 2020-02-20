@@ -91,7 +91,8 @@ class UpdateDriverView(View):
         print(request.FILES)
         
         form = DriverEditForm(request.POST,request.FILES)
-        print(form.cleaned_data)
+        print(form.errors)
+        print(form.is_valid())
         if form.is_valid():
             print(form.cleaned_data)
             print('bisa woiii')
@@ -113,15 +114,15 @@ class UpdateDriverView(View):
             
             try:
                 driver.sim_pict = request.FILES['sim_pict']
-            except expression:
+            except Exception:
                 pass
             try:
                 driver.ktp_pict = request.FILES['ktp_pict']
-            except expression:
+            except Exception:
                 pass
             try:
                 driver.photo_profile = request.FILES['photo_profile']
-            except expression:
+            except Exception:
                 pass
 
 
