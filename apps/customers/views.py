@@ -8,16 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
-
-class MemberLandingPage(View):
-    template_name = 'customers/user_landing_page.html'
-
-    def get(self,request):
-        car = Cars.objects.all()
-
-        return render(request,self.template_name,{
-            'car':car,
-        })
+import datetime
 
 class AdminLandingPage(View):
     template_name = 'customers.html'
@@ -235,5 +226,109 @@ class UpdateDetailUser(View):
                 
                 cus.save()
                 return redirect('/customers')
+
+
+#customer view
+class MemberLandingPage(View):
+    template_name = 'customers/user_landing_page.html'
+
+    def get(self,request,customer_id):
+        car = Cars.objects.all()
+
+        return render(request,self.template_name,{
+            'car':car,
+            'customer_id':customer_id
+        })
+class CustomerRent(View):
+    template_name = 'customers/customer_rent.html'
+    def get(self,request,customer_id,car_id):
+        print(customer_id)
+        print(car_id)
+        user = User.objects.get(id=customer_id)
+        car = Cars.objects.get(id=car_id)
+        cus = Customers.objects.get(user=user)
+        form = CustomerRentForm(request.POST)
+        return render(request,self.template_name,{
+            'car':car,
+            'cus':cus,
+            'customer_id':customer_id,
+            'car_id':car_id,
+            'form':form
+        })
+    
+    def post(self,request,customer_id,car_id):
+        form = CustomerRentForm(request.POST)
+        print(customer_id)
+        print('value of rental date :',request.POST['rental_date'])
+        print('class dari rental date',type(request.POST['rental_date']))
+        if form.is_valid():
+            car = Cars.objects.get(id=car_id)
+            user = User.objects.get(id=customer_id)
+            cus = Customers.objects.get(user=user)
+            rent = Rental()
+            rent.customer = cus
+            rent.car = car
+            rent.rental_date = datetime.datetime.strftime(form.cleaned_data['rental_date'],"%Y-%m-%d %H:%M:%S")
+            rent.expire_rental_date = datetime.datetime.strftime(form.cleaned_data['expire_rental_date'],"%Y-%m-%d %H:%M:%S")
+            rent.driver = form.cleaned_data['driver']
+            rent.petrol = form.cleaned_data['petrol']
+            rent.save()
+            print(rent.id)
+
+            return redirect(f'/customers/billing_detail/{rent.id}')
+        return  HttpResponse(form.errors)
+
+class BillingDetail(View):
+    template_name = 'customers/billing_detail.html'
+    def get(self,request,id):
+        rent = Rental.objects.get(id=id)
+        
+        #get count day operation
+        d0 = datetime.datetime.strftime(rent.rental_date,"%Y-%m-%d %H:%M:%S")
+        d1 = datetime.datetime.strftime(rent.expire_rental_date,"%Y-%m-%d %H:%M:%S")
+        mulai = str(d0[-11])+ str(d0[-10])
+        print(mulai)
+        berakhir = str(d1[-11])+ str(d1[-10])
+        print(berakhir)
+        awal = int(mulai)
+        akhir = int(berakhir)
+
+        count_days= akhir - awal
+        print(count_days)
+
+        #get bill operation
+        bill = rent.car.price * count_days
+
+        #petrol decription
+        if rent.petrol == True:
+            petrol_decription = 'yes'
+            petrol_amount = 150000
+        else:
+            petrol_decription = '-'
+            petrol_amount = 0
+        
+        #driver description & payment
+        if rent.driver == True:
+            driver_description = str(count_days) +' Day'
+            driver_payment = 150000
+        else:
+            driver_description = '-'
+            driver_payment = 0
+        
+        driver_payment = driver_payment*count_days
+
+        total = bill+petrol_amount+driver_payment
+        
+
+        return render(request,self.template_name,{
+            'rent':rent,
+            'count_days':count_days,
+            'bill':bill,
+            'petrol_decription':petrol_decription,
+            'petrol_amount':petrol_amount,
+            'driver_description':driver_description,
+            'driver_payment':driver_payment,
+            'total':total
+        })
 
 

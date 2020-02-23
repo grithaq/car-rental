@@ -38,8 +38,23 @@
             <label for="">{{form.verification.label}}</label>
             {{form.verification}}
         </div>
-        <div>
-            <button type="submit" class="btn btn-info" style="margin-left: 90%;">Submit</button>
+        <div class="row">
+            <div style="margin-left: 85%;">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="/rental/detail/{{id}}" style="margin-left: 0%;" class="btn btn-warning" >Kembali</a>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-info" style="margin-left: 10%;">Submit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            
         </div>
 
     </form>

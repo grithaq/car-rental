@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Cars
 from django.views import  View
-from .forms import CarsForm
+from .forms import CarsForm,CarsEditForm
 from django.http import HttpResponse
 
 class KatalogView(View):
@@ -68,9 +68,10 @@ class UpdateKatalog(View):
             'car_brand':car.car_brand,
             'seating_capacity':car.seating_capacity,
             'cargo_volume':car.cargo_volume,
+            'price':car.price,
             'pict':car.car_pict
         }
-        form = CarsForm(initial = data)
+        form = CarsEditForm(initial = data)
         print(form)
         return render(request,self.template_name,{
             'form':form
@@ -80,26 +81,22 @@ class UpdateKatalog(View):
 class UbahKatalog(View):
 
     def post(self,request):
-        form = CarsForm(request.POST,request.FILES)
+        form = CarsEditForm(request.POST,request.FILES)
         if form.is_valid():
             car = Cars.objects.get(id=form.cleaned_data['id'])
             car.car_name = form.cleaned_data['car_name']
             car.car_brand = form.cleaned_data['car_brand']
             car.seating_capacity =form.cleaned_data['seating_capacity']
             car.cargo_volume = form.cleaned_data['cargo_volume']
-            car.car_pict = request.FILES['car_pict']
+            car.price = form.cleaned_data['price']
+            try:
+                car.car_pict = request.FILES['car_pict']
+            except Exception:
+                pass
             car.save()
 
             return redirect('/car')
         return HttpResponse(form.errors)
 
 
-
-# class KatalogCostumers(View):
-#     tempate_name = 'user_landing_page.html'
-#     def get(self,request):
-#         mobil = Cars.objects.all()
-#         return render(request,self.tempate_name,{
-#             'mob':mobil,
-#         })
         

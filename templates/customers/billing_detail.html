@@ -1,0 +1,73 @@
+{% include "base/index.html" %}
+{% block contain %}
+{% include "base/user_navbar.html" %}
+<div class="container">
+    <h1 style="text-decoration: underline;">Billing Detail</h1>
+    <br>
+    <div class="row">
+        <div class="col-md-3 card">
+            <h1 style="margin-bottom: 136px;
+            text-align: center;
+            margin-top: 75px;">LOGO</h1>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> {{rent.car.car_brand}} {{rent.car.car_name}}</td>
+                        <td>{{count_days}} Day</td>
+                        <td>Rp.{{bill}}</td>
+                    </tr>
+                    <tr>
+                        <td>Driver</td>
+                        <td>{{driver_description}}</td>
+                        <td>Rp.{{driver_payment}}</td>
+                    </tr>
+                    <tr>
+                        <td>Petrol</td>
+                        <td>{{petrol_decription}}</td>
+                        <td>Rp.{{petrol_amount}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Rp.{{total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table>
+                <h4>Pilih Pebayaran</h4>
+                <tbody>
+                    <tr style="margin-right: 15px;">
+                        <td>
+                            <a href="#" class="btn btn-primary">BRI</a>
+                        </td>
+                    </tr>
+                    <tr style="margin-bottom: 15px;">
+                        <td>
+                            <a href="#" class="btn btn-warning">MANDIRI</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="btn btn-danger">BNI</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock contain %}

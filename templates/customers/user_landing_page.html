@@ -2,8 +2,8 @@
 {% block content %}
 {% include 'base/user_navbar.html' %}
 <div class="container">
-  <div class="row">
-    {% for c in car %}
+  {% for c in car %}
+  <div class="row" style="margin-bottom: 25px;">
     <div class="col-md-3">
       <img src="{{c.car_pict.url}}" alt="">
     </div>
@@ -33,10 +33,10 @@
         <h1>Rp.{{c.price}}</h1>
       </div>
       <div>
-        <a href="#" class="btn btn-primary" style="color: aliceblue; margin-left: 75px; margin-top: 25px; width: 191px; height: 54px;">Rent Now</a>
+        <a href="{% url 'customers:rent_form' customer_id c.id %}" class="btn btn-primary" style="color: aliceblue; margin-left: 75px; margin-top: 25px; width: 191px; height: 54px;">Rent Now</a>
       </div>
     </div>
-    {% endfor %}
   </div>
+  {% endfor %}
 </div>
 {% endblock content %}

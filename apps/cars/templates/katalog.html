@@ -10,12 +10,12 @@
                         <div class="row" style="margin-bottom: 74px;">
                           <div class="card">
                             <img src="{{c.car_pict.url}}" style="height: 216px; width: 345px;">
-                            <div style="text-align: center; background-color:#f3ff3e;">
+                            <div style="text-align: center; background-color:#dee2e6;">
                               <h2 style="margin-left:18px ;">{{c.car_name}}</h2>
                             </div>
                           </div>
-                          <div class="col">
-                            <table class="table">
+                          <div class="col-md-5">
+                            <table class="table table-striped">
                               <tr>
                                 <td> Brand </td>
                                 <td> : </td>
@@ -29,7 +29,7 @@
                               <tr>
                                 <td> Cargo Volume </td>
                                 <td> : </td>
-                                <td>{{c.cargo_volume}}</td>
+                                <td>{{c.cargo_volume}} Liters</td>
                               </tr>
                               <tr>
                                 <td> Price / 12 Hour </td>
@@ -41,13 +41,13 @@
                           <div class="col">
                             <tr>
                               <td>
-                                <a href="{% url 'car:delete' c.id %}" class="btn btn-danger">Delete</a>
-                                <a href="{% url 'car:change' c.id %}" class="btn btn-info">Edit</a>
+                                <a href="{% url 'car:delete' c.id %}" class="btn btn-danger" style="margin-top: 54px;">Delete</a>
+                                <a href="{% url 'car:change' c.id %}" class="btn btn-info" style="margin-top: 53px;">Edit</a>
                               </td>
                             </tr>
                           </div>
                         </div>
-                      </div>
+                      </div >
                       {% endfor %}
         </div>
     </div>

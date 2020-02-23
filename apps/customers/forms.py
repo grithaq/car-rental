@@ -1,5 +1,5 @@
 from django import forms
-
+from apps.rental.models import *
 
 class UserForm(forms.Form):
     id = forms.CharField(widget=forms.HiddenInput(),required=False)
@@ -95,3 +95,18 @@ class EditDetail(forms.Form):
     }))
     gender = forms.ChoiceField(choices=GENDER,label='Gender',initial='L',required=True)
     photo_profile = forms.ImageField(required=False)
+
+class CustomerRentForm(forms.Form):
+    id = forms.CharField(widget=forms.HiddenInput(),required=False)
+    car_id = forms.CharField(widget=forms.HiddenInput(),required=False)
+    rental_date = forms.DateTimeField(label='Start Date',widget=forms.TextInput(attrs={
+        'class':'form-control',
+        'placeholder':'yyyy-mm-dd  HH:MM:SS'
+    }))
+    expire_rental_date = forms.DateTimeField(label='Expire Date',widget=forms.TextInput(attrs={
+        'class':'form-control',
+        'placeholder':'yyyy-mm-dd  HH:MM:SS'
+    }))
+    payment_pict = forms.ImageField(required=False)
+    driver = forms.BooleanField(required=False)
+    petrol = forms.BooleanField(required=False)

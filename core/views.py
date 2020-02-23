@@ -73,7 +73,7 @@ class RegisterProcess(View):
                 cus.save()
                 print(cus)
 
-                return redirect('/customers/landing_page')
+                return redirect(f'/customers/landing_page/{user.id}')
             else:
                 return redirect('/register')
         else:
@@ -117,12 +117,13 @@ class LoginProcess(View):
                 print("type of user",(type(user)))
                 print(user.is_superuser)
                 print(user)
+                print(user.id)
                 if user.is_superuser is True:
                     login(request,user)
                     return redirect('/car')
                 else:
                     login(request,user)
-                    return redirect('/customers/landing_page')
+                    return redirect(f'/customers/landing_page/{user.id}')
             else:
                 messages.error(request,' Username dan Password salah')
                 return redirect('/login')

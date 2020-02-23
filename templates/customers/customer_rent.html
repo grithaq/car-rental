@@ -1,0 +1,89 @@
+{% include 'base/index.html' %}
+{% block contain %}
+{% include 'base/user_navbar.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="table">
+                <thead>
+                    <th>
+                        <h4 style="text-decoration: underline;">{{user.first_name}} {{user.last_name}}</h4>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width: 116px;">Phone Number</td>
+                        <td>:</td>
+                        <td>{{cus.no_telepon}}</td>
+                    </tr>
+                    <tr>
+                        <br>
+                        <td style="width: 116px;">NIK Customer</td>
+                        <td>:</td>
+                        <td>{{cus.nik_customers}}</td>
+                    </tr>
+                </tbody>
+            </div>
+        </div>
+    </div>
+</divc>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img src="{{car.car_pict.url}}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h4 style="text-align: center;">{{car.car_name}}</h4>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Car Brand</td>
+                                <td>:</td>
+                                <td>{{car.car_brand}}</td>
+                            </tr>
+                            <tr>
+                                <td>Seating Capacity</td>
+                                <td>:</td>
+                                <td>{{car.seating_capacity  }}</td>
+                            </tr>
+                            <tr>
+                                <td>Cargo Volume</td>
+                                <td>:</td>
+                                <td>{{car.cargo_volume}} L</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="margin-left: 129px;">
+            <div class="">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-grup">
+                        <label for="">{{form.rental_date.label}}</label>
+                        {{form.rental_date}}
+                    </div>
+                    <div class="form-grup">
+                        <label for="">{{form.expire_rental_date.label}}</label>
+                        {{form.expire_rental_date}}
+                    </div>
+                    <div class="form-grup" style="margin-top: 11px;">
+                        <label for="">{{form.driver.label}}</label>
+                        {{form.driver}}
+                    </div>
+                    <div class="form-grup" style="margin-top: 4px;">
+                        <label for="">{{form.petrol.label}}</label>
+                        {{form.petrol}}
+                    </div>
+                    <div style="margin-left: 64%;
+                    margin-top: 47px;">
+                        <a href="/customers/landing_page/{{customer_id}}" class="btn btn-warning">Kembali</a>
+                        <button class="btn btn-info">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </divc>
+</divc>
+{% endblock contain %}

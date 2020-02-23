@@ -41,10 +41,10 @@ class CreateRent(View):
             rent = Rental()
             rent.customer = form.cleaned_data['customer']
             rent.car= form.cleaned_data['car']
-            rent.rental_date = datetime.datetime.strftime(form.cleaned_data['rental_date'],"%Y-%m-%d %H:%M:%S")
+            rent.rental_date = datetime.datetime.strptime(form.cleaned_data['rental_date'],"%Y-%m-%d %H:%M:%S")
             print(rent.rental_date)
             print(type(rent.rental_date))
-            rent.expire_rental_date = datetime.datetime.strftime(form.cleaned_data['expire_rental_date'],"%Y-%m-%d %H:%M:%S")
+            rent.expire_rental_date = datetime.datetime.strptime(form.cleaned_data['expire_rental_date'],"%Y-%m-%d %H:%M:%S")
             print(rent.expire_rental_date)
             print(type(rent.expire_rental_date))
             try:
@@ -88,6 +88,8 @@ class Edit(View):
     template_name = 'rental_edit.html'
     def get(self,request,id):
         rent=Rental.objects.get(id=id)
+        print('type of rental date : ',type(rent.rental_date))
+        print('value of rental date : ',rent.rental_date)
         data ={
             'id':id,
             'customer':rent.customer,
@@ -107,17 +109,25 @@ class Edit(View):
     
 class Update(View):
     def post(self,request,id):
-        form = AdminRentalForm(request.POST,request.FILES)
-        print(request.POST)
+        form = RentalEditForm(request.POST,request.FILES)
+        print(request.POST['id'])
         print(request.FILES)
+        print('cek type of rental_date : ',type(request.POST['rental_date']))
+        print('cek value of rental_date : ',request.POST['rental_date'])
         print(form.is_valid())
         if form.is_valid():
             rent = Rental.objects.get(id=id)
             rent.customer = form.cleaned_data['customer']
             rent.car = form.cleaned_data['car']
-            rent.rental_date = datetime.datetime.strftime(form.cleaned_data['rental_date'],"%Y-%m-%d %H:%M:%S")
+            if type(form.cleaned_data['rental_date'])==datetime.datetime:
+                rent.rental_date = form.cleaned_data['rental_date']
+            else:
+                rent.rental_date = datetime.datetime.strptime(form.cleaned_data['rental_date'],"%Y-%m-%d %H:%M:%S")
             print(type(rent.rental_date))
-            rent.expire_rental_date = datetime.datetime.strftime(form.cleaned_data['expire_rental_date'], "%y-%m-%d %H:%M:%D")
+            if type(form.cleaned_data['expire_rental_date'])==datetime.datetime:
+                rent.expire_rental_date=form.cleaned_data['expire_rental_date']
+            else:
+                rent.expire_rental_date = datetime.datetime.strptime(form.cleaned_data['expire_rental_date'], "%y-%m-%d %H:%M:%D")
             print(type(rent.expire_rental_date))
             try:
                 rent.payment_pict= request.FILES['payment_pict']
@@ -127,8 +137,9 @@ class Update(View):
             rent.petrol = form.cleaned_data['petrol']
             rent.verification = form.cleaned_data['verification']
             rent.save()
+            print(id)
             
-            return redirect('/rental/detail/{{id}}')
+            return redirect(f'/rental/detail/{id}')
         return HttpResponse(request,form.errors)
 
 
