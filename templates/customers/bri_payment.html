@@ -1,0 +1,57 @@
+{% extends "base/index.html" %}t
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 style="text-decoration: underline;">
+                BRI PAYMENT
+            </h1>
+            <div class="card">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>No Rekening</td>
+                            <td>:</td>
+                            <td>xxxxxxxxxx</td>
+                        </tr>
+                        <tr>
+                            <td>Bank</td>
+                            <td>:</td>
+                            <td>BRI</td>
+                        </tr>
+                        <tr>
+                            <td>A.N</td>
+                            <td>:</td>
+                            <td>PT.BRI</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-grup">
+            <label for="">{{form.payment_pict.label}}</label>
+            {{form.payment_pict}}
+        </div>
+        <div style="margin-left: 85%; margin-top: 25px;">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <button class="btn btn-info" style="margin-top: 27px;" type="submit" >Simpan</button>
+                        </td>
+                        <td>
+                            <a href="{% url 'customers:billing_detail' id %}" class="btn btn-warning" style="margin-top: 26px;">Kembali</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

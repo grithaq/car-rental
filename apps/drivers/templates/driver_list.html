@@ -1,6 +1,6 @@
-{% include 'base/index.html' %}
-{% block contain %}
-{% include 'base/navbar.html' %}
+{% extends "base/index.html" %}
+{% block content %}
+
 <div class="container">
     <a href="/drivers/add_driver" class="btn btn-primary">+</a>
     <a href="#" class='btn btn-success' > + by user (add driver by user)</a>
@@ -35,4 +35,4 @@
     </table>
 </div>
 
-{% endblock contain %}
+{% endblock content %}

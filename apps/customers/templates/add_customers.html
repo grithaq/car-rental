@@ -1,6 +1,6 @@
-{% include "base/index.html" %}
+{% extends "base/index.html" %}
 
-{% block contain %}
+{% block content %}
 <div class="container">
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -44,4 +44,4 @@
     </form>
 </div>
 
-{% endblock contain %}
+{% endblock content %}

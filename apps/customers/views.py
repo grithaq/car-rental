@@ -233,7 +233,9 @@ class MemberLandingPage(View):
     template_name = 'customers/user_landing_page.html'
 
     def get(self,request,customer_id):
-        car = Cars.objects.all()
+        car = Cars.objects.filter(avaliable=True)
+        print(car)
+
 
         return render(request,self.template_name,{
             'car':car,
@@ -263,6 +265,7 @@ class CustomerRent(View):
         print('class dari rental date',type(request.POST['rental_date']))
         if form.is_valid():
             car = Cars.objects.get(id=car_id)
+            print(car)
             user = User.objects.get(id=customer_id)
             cus = Customers.objects.get(user=user)
             rent = Rental()
@@ -322,6 +325,7 @@ class BillingDetail(View):
 
         return render(request,self.template_name,{
             'rent':rent,
+            'id':id,
             'count_days':count_days,
             'bill':bill,
             'petrol_decription':petrol_decription,
@@ -330,5 +334,69 @@ class BillingDetail(View):
             'driver_payment':driver_payment,
             'total':total
         })
+
+class CustomerBriPayment(View):
+    template_name ='customers/bri_payment.html'
+    def get(self,request,id):
+        form = CustomerPayment()
+        return render(request,self.template_name,{
+            'form':form,
+            "id":id,
+        })
+    def post(self,request,id):
+        rent = Rental.objects.get(id=id)
+        form = CustomerPayment(request.POST,request.FILES)
+        if form.is_valid:
+            rent.payment_pict = request.FILES['payment_pict']
+            car = Cars.objects.get(id=rent.car.id)
+            car.avaliable = False
+            car.save()
+            rent.save()
+            return redirect(f'/customers/landing_page/{rent.customer.user.id}')
+        return HttpResponse(form)
+
+class CustomerMandiriPayment(View):
+    template_name ='customers/mandiri_payment.html'
+    def get(self,request,id):
+        form = CustomerPayment()
+        return render(request,self.template_name,{
+            'form':form,
+            "id":id,
+        })
+    def post(self,request,id):
+        rent = Rental.objects.get(id=id)
+        form = CustomerPayment(request.POST,request.FILES)
+        if form.is_valid:
+            rent.payment_pict = request.FILES['payment_pict']
+            car = Cars.objects.get(id=rent.car.id)
+            car.avaliable = False
+            car.save()
+            rent.save()
+            return redirect(f'/customers/landing_page/{rent.car.id}')
+        return HttpResponse(form)
+
+class CustomerBniPayment(View):
+    template_name ='customers/bni_payment.html'
+    def get(self,request,id):
+        form = CustomerPayment()
+        return render(request,self.template_name,{
+            'form':form,
+            "id":id,
+        })
+    def post(self,request,id):
+        rent = Rental.objects.get(id=id)
+        form = CustomerPayment(request.POST,request.FILES)
+        if form.is_valid:
+            rent.payment_pict = request.FILES['payment_pict']
+            car = Cars.objects.get(id=rent.car.id)
+            car.avaliable = False
+            car.save()
+            rent.save()
+            return redirect(f'/customers/landing_page/{rent.car.id}')
+        return HttpResponse(form)
+
+
+        
+        
 
 

@@ -1,6 +1,5 @@
-{% include "base/index.html" %}
-{% block contain %}
-{% include "base/user_navbar.html" %}
+{% extends "base/index.html" %}
+{% block content %}
 <div class="container">
     <h1 style="text-decoration: underline;">Billing Detail</h1>
     <br>
@@ -45,29 +44,21 @@
 </div>
 <div class="container">
     <div class="row">
+        <div class="col"></div>
         <div class="col">
-            <table>
-                <h4>Pilih Pebayaran</h4>
-                <tbody>
-                    <tr style="margin-right: 15px;">
-                        <td>
-                            <a href="#" class="btn btn-primary">BRI</a>
-                        </td>
-                    </tr>
-                    <tr style="margin-bottom: 15px;">
-                        <td>
-                            <a href="#" class="btn btn-warning">MANDIRI</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#" class="btn btn-danger">BNI</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <h4>Pilih Pebayaran</h4>
+            <div style="margin-bottom: 19px; margin-left: 29px;">
+                <a href="{% url 'customers:bri_payment' id %}" class="btn btn-primary" style="width: 100px;">BRI</a>
+            </div>
+            <div style="margin-bottom: 19px; margin-left: 29px;">
+                <a href="{% url 'customers:mandiri_pay' id %}" class="btn btn-warning">MANDIRI</a>
+            </div>
+            <div style="margin-left: 29px;">
+                <a href="{% url 'customers:bni_pay' id %}" class="btn btn-danger" style="width: 100px;">BNI</a>
+            </div>
         </div>
+        <div class="col"></div>
     </div>
 </div>
 
-{% endblock contain %}
+{% endblock content %}

@@ -110,3 +110,6 @@ class CustomerRentForm(forms.Form):
     payment_pict = forms.ImageField(required=False)
     driver = forms.BooleanField(required=False)
     petrol = forms.BooleanField(required=False)
+
+class CustomerPayment(forms.Form):
+    payment_pict = forms.ImageField(label='Upload Bukti Pembayaran')
