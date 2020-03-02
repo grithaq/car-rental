@@ -4,9 +4,13 @@ from .models import Rental
 from .forms import *
 from django.http import HttpResponse
 import datetime
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
-class RentalList(View):
+class RentalList(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     template_name = 'rent_list.html'
     def get(self,request):
         rent = Rental.objects.filter(verification=False)
@@ -14,7 +18,9 @@ class RentalList(View):
             'rent':rent
         })
 
-class VerifiedList(View):
+class VerifiedList(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     template_name = 'verified_list.html'
 
     def get(self,request):
@@ -24,7 +30,9 @@ class VerifiedList(View):
             'rent':rent,
         })
     
-class CreateRent(View):
+class CreateRent(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     template_name = 'create_rent.html'
     def get(self,request):
         form = AdminRentalForm(request.POST)
@@ -59,7 +67,9 @@ class CreateRent(View):
             return redirect('/rental')
         return HttpResponse(request,form.errors)
 
-class Verified(View):
+class Verified(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     def get(self,request,id):
         rent = Rental.objects.get(id=id)
         rent.verification = True
@@ -67,7 +77,9 @@ class Verified(View):
 
         return redirect('/rental')
 
-class Unverified(View):
+class Unverified(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     def get(self,request,id):
         rent = Rental.objects.get(id=id)
         rent.verification = False
@@ -75,7 +87,9 @@ class Unverified(View):
 
         return redirect('/rental/verified_list')
 
-class RentalDetail(View):
+class RentalDetail(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     template_name='rental_detail.html'
     def get(self,request,id):
         rent = Rental.objects.get(id=id)
@@ -84,7 +98,9 @@ class RentalDetail(View):
             'rent':rent
         })
 
-class Edit(View):
+class Edit(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     template_name = 'rental_edit.html'
     def get(self,request,id):
         rent=Rental.objects.get(id=id)
@@ -107,7 +123,9 @@ class Edit(View):
             'id':id
         })
     
-class Update(View):
+class Update(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     def post(self,request,id):
         form = RentalEditForm(request.POST,request.FILES)
         print(request.POST['id'])
@@ -144,8 +162,19 @@ class Update(View):
 
 
 
-class Delete(View):
+class Delete(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     def get(self,request,id):
         rent = Rental.objects.get(id=id)
+        car = Cars.objects.get(id=rent.car.id)
+        car.avaliable = True
+        car.save()
         rent.delete()
         return redirect('/rental')
+
+class CarOut(LoginRequiredMixin,View):
+    pass
+
+class CarReturn(LoginRequiredMixin,View):
+    pass

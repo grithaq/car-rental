@@ -100,6 +100,9 @@ class LoginProcess(View):
 
     def post(self,request):
         print(request.POST)
+        print(request.headers)
+        print(request.user)
+        print(type(request.session))
         form = LoginForm(request.POST)
         print(form)
 
@@ -123,7 +126,7 @@ class LoginProcess(View):
                     return redirect('/car')
                 else:
                     login(request,user)
-                    return redirect(f'/customers/landing_page/{user.id}')
+                    return redirect(f'/customers/landing_page')
             else:
                 messages.error(request,' Username dan Password salah')
                 return redirect('/login')

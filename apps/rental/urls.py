@@ -12,6 +12,7 @@ urlpatterns = [
     path('update/<int:id>',Update.as_view(),name='update'),
     path('delete/<int:id>',Delete.as_view(),name='delete'),
     path('create',CreateRent.as_view(),name='create'),
+    
 
 
 ]

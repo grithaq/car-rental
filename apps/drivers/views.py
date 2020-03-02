@@ -5,10 +5,12 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
-class ListDrivers(View):
+class ListDrivers(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     template_name = 'driver_list.html'
 
     def get(self,request):
@@ -19,7 +21,10 @@ class ListDrivers(View):
             'driver':driver
         })
 
-class CreateDriver(View):
+class CreateDriver(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
+
     template_name='add_driver.html'
 
     def get(self,request):
@@ -60,7 +65,10 @@ class CreateDriver(View):
 
 
 
-class EditDriverView(View):
+class EditDriverView(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
+
     template_name = 'edit_driver.html'
 
     def get(self,request,id):
@@ -83,7 +91,10 @@ class EditDriverView(View):
             'id':id
         })
    
-class UpdateDriverView(View):
+class UpdateDriverView(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
+
 
     def post(self,request,id):
 
@@ -132,7 +143,10 @@ class UpdateDriverView(View):
         return HttpResponse(request,form.errors)
         
 
-class DeleteDriver(View):
+class DeleteDriver(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
+
 
     def get(self,request,id):
 
@@ -142,7 +156,10 @@ class DeleteDriver(View):
         return redirect('/drivers')
 
 
-class DriverDetail(View):
+class DriverDetail(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
+    
 
     template_name = 'driver_detail.html'
 

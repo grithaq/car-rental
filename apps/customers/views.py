@@ -8,9 +8,12 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 import datetime
 
-class AdminLandingPage(View):
+class AdminLandingPage(LoginRequiredMixin,View):
+    login_url= '/login/'
+    redirect_field_name = '/login'
     template_name = 'customers.html'
 
     def get(self,request):
@@ -19,7 +22,9 @@ class AdminLandingPage(View):
             'cus':cus,
         })
 
-class CreateUser(View):
+class CreateUser(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name = 'create_user.html'
     def get(self,request):
         form = UserForm(request.POST,request.FILES)
@@ -46,7 +51,9 @@ class CreateUser(View):
         return HttpResponse(request,form.errors)
 
 
-class UpdateUser(View):
+class UpdateUser(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name='/login'
     template_name = 'edit_user.html'
     def get(self,request,id):
         user = User.objects.get(id=id)
@@ -70,8 +77,6 @@ class UpdateUser(View):
     def post(self,request,id):
        
         form = UserForm(request.POST,request.FILES)
-        # print('Ini adalah reuest dari post',request.POST)
-        # print('Ini adalah request File',request.FILES)
         if form.is_valid():
             us = User.objects.get(id=id)
             print(user)
@@ -86,14 +91,18 @@ class UpdateUser(View):
             return redirect('/customers')
         return HttpResponse(request,form.errors)
 
-class DeleteUser(View):
+class DeleteUser(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     def get(self,request,id):
         obj = Customers.objects.get(id=id)
         obj.delete()
         return redirect('/customers')
 
 
-class CreateCustomers(View):
+class CreateCustomers(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name = 'add_customers.html'
     def get(self,request):
         form = CreateCustomerForm(request.POST)
@@ -128,7 +137,9 @@ class CreateCustomers(View):
         return HttpResponse(form.errors)
 
 
-class UpdateCustomers(View):
+class UpdateCustomers(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name='edit_customers.html'
     def get(self,request,id):
         cus = Customers.objects.get(id=id)
@@ -172,7 +183,9 @@ class UpdateCustomers(View):
         return HttpResponse(form.errors)
 
 
-class DetailUser(View):
+class DetailUser(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name = 'detail_user.html'
     def get(self,request,id):
         cus = Customers.objects.get(id=id)
@@ -180,7 +193,9 @@ class DetailUser(View):
             'cus':cus,
         })
 
-class EditDetailUser(View):
+class EditDetailUser(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name = 'edit_detail.html'
     def get(self,request,id):
         cus = Customers.objects.get(id=id)
@@ -200,73 +215,78 @@ class EditDetailUser(View):
         })
 
 
-class UpdateDetailUser(View):
-        def post(self,request,id):
-            form = EditDetail(request.POST,request.FILES)
-            print('test')
-            # print(form)
-            if form.is_valid():
-                print(form.cleaned_data)
-                cus = Customers.objects.get(id=form.cleaned_data['id'])
-                user = User.objects.get(id=cus.user.id)
-                print(cus)
-                user.first_name = form.cleaned_data['first_name']
-                user.last_name = form.cleaned_data['last_name']
-                user.save()
-                cus = Customers.objects.get(user=user)
-                cus.no_telepon = form.cleaned_data['no_telepon']
-                cus.nik_customers = form.cleaned_data['nik_customers']
-                cus.gender = form.cleaned_data['gender']
-                print(cus.gender)
-                try:
-                    cus.photo_profile = request.FILES['photo_profile']
-                except Exception:
-                    pass
-                
-                
-                cus.save()
-                return redirect('/customers')
+class UpdateDetailUser(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name='/login'
+
+    def post(self,request,id):
+        form = EditDetail(request.POST,request.FILES)
+        print('test')
+        # print(form)
+        if form.is_valid():
+            print(form.cleaned_data)
+            cus = Customers.objects.get(id=form.cleaned_data['id'])
+            user = User.objects.get(id=cus.user.id)
+            print(cus)
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.save()
+            cus = Customers.objects.get(user=user)
+            cus.no_telepon = form.cleaned_data['no_telepon']
+            cus.nik_customers = form.cleaned_data['nik_customers']
+            cus.gender = form.cleaned_data['gender']
+            print(cus.gender)
+            try:
+                cus.photo_profile = request.FILES['photo_profile']
+            except Exception:
+                pass
+            
+            
+            cus.save()
+            return redirect('/customers')
 
 
 #customer view
-class MemberLandingPage(View):
+class MemberLandingPage(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name = 'customers/user_landing_page.html'
 
-    def get(self,request,customer_id):
+    def get(self,request):
         car = Cars.objects.filter(avaliable=True)
+        print('ini adalah usernya',request.user)
         print(car)
 
 
         return render(request,self.template_name,{
             'car':car,
-            'customer_id':customer_id
         })
-class CustomerRent(View):
+class CustomerRent(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     template_name = 'customers/customer_rent.html'
-    def get(self,request,customer_id,car_id):
-        print(customer_id)
+    def get(self,request,car_id):
+        print(request.user)
         print(car_id)
-        user = User.objects.get(id=customer_id)
+        user = User.objects.get(username=request.user)
         car = Cars.objects.get(id=car_id)
         cus = Customers.objects.get(user=user)
         form = CustomerRentForm(request.POST)
         return render(request,self.template_name,{
             'car':car,
             'cus':cus,
-            'customer_id':customer_id,
             'car_id':car_id,
             'form':form
         })
     
-    def post(self,request,customer_id,car_id):
+    def post(self,request,car_id):
         form = CustomerRentForm(request.POST)
-        print(customer_id)
         print('value of rental date :',request.POST['rental_date'])
         print('class dari rental date',type(request.POST['rental_date']))
         if form.is_valid():
             car = Cars.objects.get(id=car_id)
             print(car)
-            user = User.objects.get(id=customer_id)
+            user = User.objects.get(username=request.user)
             cus = Customers.objects.get(user=user)
             rent = Rental()
             rent.customer = cus
@@ -281,7 +301,9 @@ class CustomerRent(View):
             return redirect(f'/customers/billing_detail/{rent.id}')
         return  HttpResponse(form.errors)
 
-class BillingDetail(View):
+class BillingDetail(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name = 'customers/billing_detail.html'
     def get(self,request,id):
         rent = Rental.objects.get(id=id)
@@ -335,7 +357,9 @@ class BillingDetail(View):
             'total':total
         })
 
-class CustomerBriPayment(View):
+class CustomerBriPayment(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name ='customers/bri_payment.html'
     def get(self,request,id):
         form = CustomerPayment()
@@ -352,10 +376,12 @@ class CustomerBriPayment(View):
             car.avaliable = False
             car.save()
             rent.save()
-            return redirect(f'/customers/landing_page/{rent.customer.user.id}')
+            return redirect(f'/customers/landing_page')
         return HttpResponse(form)
 
-class CustomerMandiriPayment(View):
+class CustomerMandiriPayment(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name ='customers/mandiri_payment.html'
     def get(self,request,id):
         form = CustomerPayment()
@@ -372,10 +398,12 @@ class CustomerMandiriPayment(View):
             car.avaliable = False
             car.save()
             rent.save()
-            return redirect(f'/customers/landing_page/{rent.car.id}')
+            return redirect(f'/customers/landing_page')
         return HttpResponse(form)
 
-class CustomerBniPayment(View):
+class CustomerBniPayment(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name = '/login'
     template_name ='customers/bni_payment.html'
     def get(self,request,id):
         form = CustomerPayment()
@@ -392,7 +420,7 @@ class CustomerBniPayment(View):
             car.avaliable = False
             car.save()
             rent.save()
-            return redirect(f'/customers/landing_page/{rent.car.id}')
+            return redirect(f'/customers/landing_page')
         return HttpResponse(form)
 
 

@@ -19,11 +19,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from core.views import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from apps.rental.views import *
 
-# from apps.customers.views import *
-# from apps.cars.views import KatalogView
-
-# app_name = 'apps.drivers'
 urlpatterns = [
     path('admin/',admin.site.urls),
     path('',Base.as_view()),
@@ -34,13 +31,14 @@ urlpatterns = [
     path('login/process',LoginProcess.as_view()),
     path('logout',Logout.as_view()),
 
-    #customers
-    # path('customers/landing_page',MemberLandingPage.as_view()),
 
 
 
     #admin
     path('user_admin/',AdminKatalog.as_view()),
+    path('Rent_History',CarOut.as_view()),
+    path('Rent_History/car_return',CarReturn.as_view()),
+
     
 
     #include

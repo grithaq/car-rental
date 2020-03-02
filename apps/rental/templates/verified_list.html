@@ -22,6 +22,7 @@
                         <th>Expire Rental Date</th>
                         <th>Phone Number</th>
                         <th></th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,9 +36,13 @@
                         <td>{{r.rental_date}}</td>
                         <td>{{r.expire_rental_date}}</td>
                         <td>{{r.customer.no_telepon}}</td>
-                        <td style="width: 268px;">
+                        <td style="width: 196px;">
                             <a href="{% url 'rental:unverified' r.id %}" class="btn btn-primary">Unverify</a>
                             <a href="#" class="btn btn-success">Detail</a>
+                            
+                        </td>
+                        <td style="width: 25px;" >
+                            <a style="width: 90px;" href="#" class="btn btn-warning">Car Out</a>
                         </td>
                     </tr>
                     

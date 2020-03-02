@@ -3,8 +3,11 @@ from .models import Cars
 from django.views import  View
 from .forms import CarsForm,CarsEditForm
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class KatalogView(View):
+class KatalogView(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     template_name = 'katalog.html'
 
     def get(self,request):
@@ -16,7 +19,9 @@ class KatalogView(View):
             'cars':cars
         })
 
-class TambahKatalogView(View):
+class TambahKatalogView(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
 
     template_name = 'tambah_katalog.html'
 
@@ -28,7 +33,9 @@ class TambahKatalogView(View):
         })
     
 
-class SaveKatalog(View):
+class SaveKatalog(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
 
     def post(self,request):
         form = CarsForm(request.POST or None,request.FILES or None)
@@ -47,7 +54,9 @@ class SaveKatalog(View):
         return HttpResponse(form.errors)
             
 
-class DeleteKatalog(View):
+class DeleteKatalog(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
 
     def get(self,request,id):
 
@@ -56,7 +65,9 @@ class DeleteKatalog(View):
 
         return redirect('/car')
 
-class UpdateKatalog(View):
+class UpdateKatalog(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
     template_name = 'edit_katalog.html'
     def get(self,request,id):
         print(request.POST)
@@ -78,7 +89,9 @@ class UpdateKatalog(View):
         })
 
 
-class UbahKatalog(View):
+class UbahKatalog(LoginRequiredMixin,View):
+    login_url = '/login'
+    redirect_field_name ='/login'
 
     def post(self,request):
         form = CarsEditForm(request.POST,request.FILES)

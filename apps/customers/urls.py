@@ -14,8 +14,8 @@ urlpatterns = [
     path('update_detail/<int:id>',UpdateDetailUser.as_view(),name='update_detail'),
 
     #customers url
-    path('landing_page/<int:customer_id>', MemberLandingPage.as_view()), #customer landing page
-    path('rent_form/<int:customer_id>/<int:car_id>',CustomerRent.as_view(),name='rent_form'),
+    path('landing_page/', MemberLandingPage.as_view()), #customer landing page
+    path('rent_form/<int:car_id>',CustomerRent.as_view(),name='rent_form'),
     path('billing_detail/<int:id>',BillingDetail.as_view(),name='billing_detail'),
     path('bri_payment/<int:id>',CustomerBriPayment.as_view(),name='bri_payment'),
     path('mandiri_pay/<int:id>',CustomerMandiriPayment.as_view(),name='mandiri_pay'),
