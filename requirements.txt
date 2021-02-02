@@ -7,7 +7,7 @@ backcall==0.1.0
 backports-abc==0.5
 backports.ssl-match-hostname==3.7.0.1
 billiard==3.6.1.0
-bleach==3.1.0
+bleach==3.3.0
 brewer2mpl==1.4.1
 celery==4.3.0
 certifi==2018.11.29
