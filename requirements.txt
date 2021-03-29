@@ -86,7 +86,7 @@ py2neo==4.2.0
 pycodestyle==2.5.0
 pycparser==2.19
 pyfcm==1.4.5
-Pygments==2.3.1
+Pygments==2.7.4
 PyJWT==1.7.1
 pylint==2.4.4
 pylint-django==2.0.12
