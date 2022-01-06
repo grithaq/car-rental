@@ -9,7 +9,7 @@ backports.ssl-match-hostname==3.7.0.1
 billiard==3.6.1.0
 bleach==3.1.0
 brewer2mpl==1.4.1
-celery==4.3.0
+celery==5.2.2
 certifi==2018.11.29
 cffi==1.12.1
 chardet==3.0.4
