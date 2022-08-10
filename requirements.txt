@@ -58,7 +58,7 @@ mistune==0.8.4
 mock==2.0.0
 more-itertools==7.2.0
 mysqlclient==1.4.5
-nbconvert==5.4.1
+nbconvert==6.3.0
 nbformat==4.4.0
 neo4jrestclient==2.1.1
 neobolt==1.7.4
